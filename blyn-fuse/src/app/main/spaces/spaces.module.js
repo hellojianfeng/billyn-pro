@@ -16,7 +16,7 @@
                 url: '/spaces',
                 authenticate: true,
                 resolve: {
-                    mySpaces: function (apiResolver, $rootScope) {
+                    mySpaces: function (apiResolver, $rootScope, Util) {
                         return apiResolver.resolve('space@getMySpaces')
                             .then(function (mySpaces) {
                                 $rootScope.current = $rootScope.current || {};
@@ -28,7 +28,7 @@
                                         itemName = 'spaces.'+'mySpace';
                                         title = 'mySpace';
                                     } else {
-                                        itemName = 'spaces.'+space.name;
+                                        itemName = 'spaces.'+Util.dotToDashInString(space.name);
                                         title = space.name;
                                     }
                                                                     
@@ -49,7 +49,8 @@
                                     });
                                     //space circles
                                     var spaceHomeItem = itemName + '.circles';
-                                    var state = 'app.spaces.app.circle({spaceId:'+space._id+'appId:'+'})'
+                                    //var appEngine = space.getAppByName('appEngine');
+                                    var state = 'app.spaces.app.circle({spaceId:'+space._id+',appId:2'+'})'
                                     msNavigationServiceProvider.saveItem(spaceHomeItem, {
                                         title: 'circles',
                                         state: state,
